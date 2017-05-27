@@ -1,0 +1,19 @@
+{
+  "name": "ence",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g-harel/ence.git"
+  },
+  "author": "g-harel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/g-harel/ence/issues"
+  },
+  "homepage": "https://github.com/g-harel/ence#readme"
+}
