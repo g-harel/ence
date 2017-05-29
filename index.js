@@ -17,11 +17,20 @@ const ence = (obj) => {
                     a = null;
                     return;
                 }
-                let temp = a;
-                while (address.length > 1) {
-                    temp = temp[address.shift()];
+                let _a = a;
+                let _b = b;
+                for (let i = 0; i + 1 < address.length; ++i) {
+                    _a = _a[address[i]];
+                    _b = _b[address[i]];
                 }
-                temp[address[0]] = null;
+                let lastKey = address[address.length - 1];
+                if (Array.isArray(_a)) {
+                    if (_a[lastKey] == null) {
+                        _a[lastKey] = _b[lastKey];
+                    }
+                    return;
+                }
+                _a[lastKey] = null;
             });
         }
         return a;
@@ -29,8 +38,10 @@ const ence = (obj) => {
 
     const scan = (obj) => {
         if (Array.isArray(obj)) {
-            let temp = obj.map(scan);
-            return [temp.slice(1).reduce(compare, temp[0])];
+            let temp = obj
+                .filter((item) => item != null)
+                .map(scan);
+            return [temp.slice(1).reduce(compare, temp[0]) || null];
         }
         if (obj === Object(obj)) {
             let temp = {};

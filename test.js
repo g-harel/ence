@@ -40,6 +40,22 @@ describe('ence', () => {
         });
     });
 
+    it('ignores empty arrays', () => {
+        expect(ence([[0, 1, 2], [], []])).toMatchObject([['number']]);
+        expect(ence([[], [], [0, 1, 2]])).toMatchObject([['number']]);
+        expect(ence([{a: []}, {a: [{b: 1}]}])).toMatchObject([{a: [{b: 'number'}]}]);
+        expect(ence([{a: [{b: 1}]}, {a: []}])).toMatchObject([{a: [{b: 'number'}]}]);
+        expect(ence([{a: []}, {a: []}])).toMatchObject([{a: [null]}]);
+    });
+
+    it('ignores empty array items (null, undefined)', () => {
+        expect(ence([null, {a: 0}])).toMatchObject([{a: 'number'}]);
+        expect(ence([{a: 0}, null])).toMatchObject([{a: 'number'}]);
+        expect(ence([undefined, {a: 0}])).toMatchObject([{a: 'number'}]);
+        expect(ence([{a: 0}, undefined])).toMatchObject([{a: 'number'}]);
+        expect(ence([null, undefined])).toMatchObject([null]);
+    });
+
     it('collapses arrays recursively', () => {
         expect(ence({
             a: [
