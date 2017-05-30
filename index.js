@@ -2,6 +2,8 @@
 
 const diip = require('diip');
 
+const conflict = 'conflict';
+
 const ence = (obj) => {
     try {
         obj = JSON.parse(JSON.stringify(obj));
@@ -12,26 +14,29 @@ const ence = (obj) => {
     const compare = (a, b) => {
         let diff = diip(a, b);
         if (diff !== null) {
-            diff.forEach((address) => {
-                if (address.length === 0) {
-                    a = null;
-                    return;
-                }
+            if (diff[0].length === 0) {
+                return conflict;
+            }
+            for (let i = 0; i < diff.length; ++i) {
+                let address = diff[i];
                 let _a = a;
                 let _b = b;
-                for (let i = 0; i + 1 < address.length; ++i) {
-                    _a = _a[address[i]];
-                    _b = _b[address[i]];
+                for (let j = 0; j + 1 < address.length; ++j) {
+                    _a = _a[address[j]];
+                    _b = _b[address[j]];
                 }
                 let lastKey = address[address.length - 1];
-                if (Array.isArray(_a)) {
-                    if (_a[lastKey] == null) {
-                        _a[lastKey] = _b[lastKey];
-                    }
-                    return;
+                if (_a[lastKey] == null) {
+                    _a[lastKey] = _b[lastKey];
+                    continue;
                 }
-                _a[lastKey] = null;
-            });
+                if (_b[lastKey] == null) {
+                    continue;
+                }
+                if (_a[lastKey] != _b[lastKey]) {
+                    _a[lastKey] = conflict;
+                }
+            };
         }
         return a;
     };
@@ -41,7 +46,11 @@ const ence = (obj) => {
             let temp = obj
                 .filter((item) => item != null)
                 .map(scan);
-            return [temp.slice(1).reduce(compare, temp[0]) || null];
+            let collapsed = temp.slice(1).reduce(compare, temp[0]);
+            if (collapsed) {
+                return [collapsed];
+            }
+            return [];
         }
         if (obj === Object(obj)) {
             let temp = {};
