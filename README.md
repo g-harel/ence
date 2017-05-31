@@ -21,13 +21,22 @@ ence({a: {b: true}}); // {a: {b: 'boolean'}}
 
 ence([0, 1, 2, 3]); // ['number']
 
+
 ence({
     a: [
-        {b: 'a', c: [0, 1, 2]},
-        {b: 'b', c: [3, 7], d: true},
-        {b: 'c', c: [6, 8, 2]},
+        {
+            b: 'a',
+            c: [0, 1, 2],
+        }, {
+            b: 'b',
+            c: [3, 7],
+            d: true,
+        }, {
+            b: 'c',
+            c: [6, 8, 2],
+        },
     ],
     b: true,
 });
-// {a: [{b: 'string', c: ['number'], d: null}], b: 'boolean'}
+// {a: [{b: 'string', c: ['number'], d: 'boolean'}], b: 'boolean'}
 ````
