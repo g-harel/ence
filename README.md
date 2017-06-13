@@ -21,7 +21,6 @@ ence({a: {b: true}}); // {a: {b: 'boolean'}}
 
 ence([0, 1, 2, 3]); // ['number']
 
-
 ence({
     a: [
         {
