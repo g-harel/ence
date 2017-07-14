@@ -68,6 +68,6 @@ const ence = (obj) => {
     return scan(obj);
 };
 
-ence.compare = compare;
+ence.compare = (...items) => ence([...items])[0];
 
 module.exports = ence;

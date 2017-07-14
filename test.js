@@ -53,9 +53,18 @@ describe('ence', () => {
     it('uses null when value type is conflicting', () => {
         expect(ence([0, 'a'])).toEqual(['conflict']);
         expect(ence([{a: 0}, {a: 'a'}])).toEqual([{a: 'conflict'}]);
-        expect(ence([{a: {b: 0, c: ['c'], d: 2}},
-                     {a: {b: true, c: ['a', 'b', 'c'], d: 1}},
-                     {a: {b: 0, c: ['a', 'c']}}]))
+        expect(ence([
+            {a: {b: 0, c: ['c'], d: 2}},
+            {a: {b: true, c: ['a', 'b', 'c'], d: 1}},
+            {a: {b: 0, c: ['a', 'c']}},
+        ]))
             .toEqual([{a: {b: 'conflict', c: ['string'], d: 'number'}}]);
+    });
+
+    describe('compare', () => {
+        it('should compare objects', () => {
+            expect(ence.compare({a: [0, 1]}, {a: []}, {a: null}))
+                .toEqual({a: ['number']});
+        });
     });
 });

@@ -15,26 +15,27 @@ $ npm install --save ence
 ````javascript
 const ence = require('ence');
 
-ence(0); // 'number'
+ence(0);
+// 'number'
 
-ence({a: {b: true}}); // {a: {b: 'boolean'}}
+ence({a: {b: true}});
+// {a: {b: 'boolean'}}
 
-ence([0, 1, 2, 3]); // ['number']
+ence([0, 1, 2, 3]);
+// ['number']
 
 ence({
-    a: [
-        {
-            b: 'a',
-            c: [0, 1, 2],
-        }, {
-            b: 'b',
-            c: [3, 7],
-            d: true,
-        }, {
-            b: 'c',
-            c: [6, 8, 2],
-        },
-    ],
+    a: [{
+        b: 'a',
+        c: [0, 1, 2],
+    }, {
+        b: 'b',
+        c: [3, 7],
+        d: true,
+    }, {
+        b: 'c',
+        c: [6, 8, 2],
+    }],
     b: true,
 });
 // {a: [{b: 'string', c: ['number'], d: 'boolean'}], b: 'boolean'}
