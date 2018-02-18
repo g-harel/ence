@@ -17,9 +17,14 @@
   },
   "homepage": "https://github.com/g-harel/ence#readme",
   "devDependencies": {
-    "jest": "^20.0.4"
+    "jest": "^20.0.4",
+    "eslint-config-google": "^0.9.1",
+    "eslint": "^4.18.0"
   },
   "dependencies": {
     "diip": "^0.0.1"
+  },
+  "bin": {
+    "ence": "bin/ence.js"
   }
 }

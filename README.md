@@ -4,13 +4,21 @@
 
 Recursively travels an object to find the type of each value. Arrays are collapsed into a single item that has the most possible type information about each child. When there is a conflict between types, the value is set to the string `'conflict'`.
 
-## Install
+## CLI Usage
+
+```
+npm install --global ence
+```
+
+```
+curl -s https://myjsonapi.com/posts | ence
+```
+
+## Package Usage
 
 ````
 $ npm install --save ence
 ````
-
-## Usage
 
 ````javascript
 const ence = require('ence');
