@@ -1,0 +1,4 @@
+ :: object
+.a :: null
+.b :: number
+.c :: string

@@ -1,0 +1,5 @@
+ :: object
+.a :: number
+.b :: number
+.c :: array
+.c[n] :: number | string

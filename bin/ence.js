@@ -1,10 +1,10 @@
 #! /usr/bin/env node
 
-const readline = require('readline');
+const readline = require("readline");
 
-const ence = require('../');
+const ence = require("../");
 
-let input = '';
+let input = "";
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -12,15 +12,15 @@ const rl = readline.createInterface({
 });
 
 const timeout = setTimeout(() => {
-    console.log('terminated, no input after 3s');
+    console.log("terminated, no input after 3s");
     process.exit(0);
 }, 3000);
 
-rl.on('line', (line) => {
+rl.on("line", (line) => {
     clearTimeout(timeout);
-    input += line + '\n';
+    input += line + "\n";
 });
 
-rl.on('close', () => {
+rl.on("close", () => {
     console.log(JSON.stringify(ence(JSON.parse(input)), null, 2));
 });

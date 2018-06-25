@@ -1,0 +1,2 @@
+ :: array
+[n] :: null | number | string
