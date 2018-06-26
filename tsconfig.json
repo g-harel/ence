@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es3",
-    "lib": ["es2018"],
+    "target": "es2015",
     "module": "commonjs",
+    "lib": ["es2015"],
+    "declaration": true,
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,

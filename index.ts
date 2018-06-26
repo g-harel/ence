@@ -1,7 +1,7 @@
 const addressSeparator = ".";
-const typeSeparator = " | ";
 const arrayKey = "[n]";
 const typePrefix = " :: ";
+const typeSeparator = " | ";
 
 class TypeMap {
     private store: {
@@ -71,12 +71,7 @@ const addToInfo = (value: any, address: string, info: TypeInfo): void => {
 };
 
 const ence = (json: string) => {
-    let value;
-    try {
-        value = JSON.parse(json);
-    } catch (e) {
-        throw new Error("JSON could not be parsed: " + e.toString());
-    }
+    let value = JSON.parse(json);
 
     const info = new TypeInfo();
     addToInfo(value, "", info);

@@ -10,9 +10,9 @@ test("should be a function", () => {
 });
 
 test("should fail when input is not valid JSON", () => {
-    expect(() => ence("")).toThrow(/json.*parse/gi);
-    expect(() => ence("abc")).toThrow(/json.*parse/gi);
-    expect(() => ence("{0}")).toThrow(/json.*parse/gi);
+    expect(() => ence("")).toThrow(Error);
+    expect(() => ence("abc")).toThrow(Error);
+    expect(() => ence("{0}")).toThrow(Error);
 });
 
 test("should return a string", () => {
@@ -62,7 +62,7 @@ test("should match the examples", async () => {
     }, 0);
     const output = cases.map(({name, input, results}) => {
         const average = results.reduce((a, b) => a + b, 0) / results.length;
-        const padding = "".padEnd(maxNameLength - name.length);
+        const padding = Array(maxNameLength - name.length + 1).join(" ");
         name = chalk.bold.blue.underline(name);
         const avg = average.toFixed(5);
         const bytes = chalk.grey("" + input.length);
