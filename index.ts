@@ -3,41 +3,32 @@ const arrayKey = "[n]";
 const typePrefix = " :: ";
 const typeSeparator = " | ";
 
-class TypeMap {
-    private store: {
-        [type: string]: boolean;
-    } = {};
+type Map<T> = {
+    [key: string]: T;
+};
 
-    public add(type: string) {
-        this.store[type] = true;
-        return this;
-    }
-
-    public toString() {
-        return Object.keys(this.store)
-            .sort()
-            .join(typeSeparator);
-    }
-}
+const joinKeys = (o: Map<boolean>) => {
+    return Object.keys(o)
+        .sort()
+        .join(typeSeparator);
+};
 
 class TypeInfo {
-    private store: {
-        [address: string]: TypeMap;
-    } = {};
+    private store: Map<Map<boolean>> = {};
 
     public add(address: string, type: string) {
         let value = this.store[address];
         if (value === undefined) {
-            value = this.store[address] = new TypeMap();
+            value = this.store[address] = {};
         }
-        value.add(type);
+        value[type] = true;
     }
 
     public toString() {
         return Object.keys(this.store)
             .sort()
             .map((address) => {
-                return address + typePrefix + this.store[address];
+                return address + typePrefix + joinKeys(this.store[address]);
             })
             .join("\n");
     }
