@@ -1,6 +1,6 @@
  :: object
 .abc :: array
 .abc[n] :: object
-.abc[n].def :: null
-.abc[n].ghi :: number
-.abc[n].xyz :: number
+.abc[n].def :: empty | null
+.abc[n].ghi :: empty | number
+.abc[n].xyz :: empty | number

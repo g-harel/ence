@@ -1,12 +1,12 @@
  :: array
 [n] :: object
 [n].averageRating :: number
-[n].category :: string
+[n].category :: empty | string
 [n].createdAt :: number
 [n].description :: string
 [n].displayType :: string
 [n].downloadCount :: number
-[n].flags :: array
+[n].flags :: array | empty
 [n].flags[n] :: string
 [n].grants :: array
 [n].grants[n] :: object
@@ -17,25 +17,25 @@
 [n].hideFromCatalog :: boolean
 [n].hideFromDataJson :: boolean
 [n].id :: string
-[n].indexUpdatedAt :: number
+[n].indexUpdatedAt :: empty | number
 [n].metadata :: object
 [n].metadata.availableDisplayTypes :: array
 [n].metadata.availableDisplayTypes[n] :: string
-[n].metadata.custom_fields :: object
+[n].metadata.custom_fields :: empty | object
 [n].metadata.custom_fields.TEST :: object
 [n].metadata.custom_fields.TEST.CFPB1 :: string
-[n].metadata.jsonQuery :: object
+[n].metadata.jsonQuery :: empty | object
 [n].metadata.jsonQuery.order :: array
 [n].metadata.jsonQuery.order[n] :: object
 [n].metadata.jsonQuery.order[n].ascending :: boolean
 [n].metadata.jsonQuery.order[n].columnFieldName :: string
-[n].metadata.rdfClass :: string
-[n].metadata.rdfSubject :: string
+[n].metadata.rdfClass :: empty | string
+[n].metadata.rdfSubject :: empty | string
 [n].metadata.renderTypeConfig :: object
 [n].metadata.renderTypeConfig.visible :: object
-[n].metadata.renderTypeConfig.visible.fatrow :: boolean
-[n].metadata.renderTypeConfig.visible.table :: boolean
-[n].metadata.richRendererConfigs :: object
+[n].metadata.renderTypeConfig.visible.fatrow :: boolean | empty
+[n].metadata.renderTypeConfig.visible.table :: boolean | empty
+[n].metadata.richRendererConfigs :: empty | object
 [n].metadata.richRendererConfigs.fatRow :: object
 [n].metadata.richRendererConfigs.fatRow.columns :: array
 [n].metadata.richRendererConfigs.fatRow.columns[n] :: object
@@ -47,10 +47,10 @@
 [n].metadata.richRendererConfigs.fatRow.columns[n].rows[n].fields[n].type :: string
 [n].metadata.richRendererConfigs.fatRow.columns[n].styles :: object
 [n].metadata.richRendererConfigs.fatRow.columns[n].styles.width :: string
-[n].metadata.rowIdentifier :: string
-[n].metadata.rowLabel :: string
-[n].moderationStatus :: boolean
-[n].modifyingViewUid :: string
+[n].metadata.rowIdentifier :: empty | string
+[n].metadata.rowLabel :: empty | string
+[n].moderationStatus :: boolean | empty
+[n].modifyingViewUid :: empty | string
 [n].name :: string
 [n].newBackend :: boolean
 [n].numberOfComments :: number
@@ -58,9 +58,9 @@
 [n].owner :: object
 [n].owner.displayName :: string
 [n].owner.id :: string
-[n].owner.profileImageUrlLarge :: string
-[n].owner.profileImageUrlMedium :: string
-[n].owner.profileImageUrlSmall :: string
+[n].owner.profileImageUrlLarge :: empty | string
+[n].owner.profileImageUrlMedium :: empty | string
+[n].owner.profileImageUrlSmall :: empty | string
 [n].owner.screenName :: string
 [n].owner.type :: string
 [n].provenance :: string
@@ -68,11 +68,11 @@
 [n].publicationDate :: number
 [n].publicationGroup :: number
 [n].publicationStage :: string
-[n].ratings :: object
+[n].ratings :: empty | object
 [n].ratings.rating :: number
 [n].rights :: array
 [n].rights[n] :: string
-[n].rowClass :: string
+[n].rowClass :: empty | string
 [n].rowsUpdatedAt :: number
 [n].rowsUpdatedBy :: string
 [n].tableAuthor :: object
@@ -81,7 +81,7 @@
 [n].tableAuthor.screenName :: string
 [n].tableAuthor.type :: string
 [n].tableId :: number
-[n].tags :: array
+[n].tags :: array | empty
 [n].tags[n] :: string
 [n].totalTimesRated :: number
 [n].viewCount :: number

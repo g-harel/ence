@@ -41,22 +41,22 @@
 .data.children[n].data.is_self :: boolean
 .data.children[n].data.is_video :: boolean
 .data.children[n].data.likes :: null
-.data.children[n].data.link_flair_background_color :: string
+.data.children[n].data.link_flair_background_color :: empty | string
 .data.children[n].data.link_flair_css_class :: null | string
 .data.children[n].data.link_flair_richtext :: array
 .data.children[n].data.link_flair_richtext[n] :: object
 .data.children[n].data.link_flair_richtext[n].e :: string
 .data.children[n].data.link_flair_richtext[n].t :: string
-.data.children[n].data.link_flair_template_id :: string
+.data.children[n].data.link_flair_template_id :: empty | string
 .data.children[n].data.link_flair_text :: null | string
 .data.children[n].data.link_flair_text_color :: string
 .data.children[n].data.link_flair_type :: string
 .data.children[n].data.locked :: boolean
 .data.children[n].data.media :: null | object
-.data.children[n].data.media.oembed :: object
-.data.children[n].data.media.oembed.author_name :: string
-.data.children[n].data.media.oembed.author_url :: string
-.data.children[n].data.media.oembed.description :: string
+.data.children[n].data.media.oembed :: empty | object
+.data.children[n].data.media.oembed.author_name :: empty | string
+.data.children[n].data.media.oembed.author_url :: empty | string
+.data.children[n].data.media.oembed.description :: empty | string
 .data.children[n].data.media.oembed.height :: number
 .data.children[n].data.media.oembed.html :: string
 .data.children[n].data.media.oembed.provider_name :: string
@@ -68,7 +68,7 @@
 .data.children[n].data.media.oembed.type :: string
 .data.children[n].data.media.oembed.version :: string
 .data.children[n].data.media.oembed.width :: number
-.data.children[n].data.media.reddit_video :: object
+.data.children[n].data.media.reddit_video :: empty | object
 .data.children[n].data.media.reddit_video.dash_url :: string
 .data.children[n].data.media.reddit_video.duration :: number
 .data.children[n].data.media.reddit_video.fallback_url :: string
@@ -78,12 +78,12 @@
 .data.children[n].data.media.reddit_video.scrubber_media_url :: string
 .data.children[n].data.media.reddit_video.transcoding_status :: string
 .data.children[n].data.media.reddit_video.width :: number
-.data.children[n].data.media.type :: string
+.data.children[n].data.media.type :: empty | string
 .data.children[n].data.media_embed :: object
-.data.children[n].data.media_embed.content :: string
-.data.children[n].data.media_embed.height :: number
-.data.children[n].data.media_embed.scrolling :: boolean
-.data.children[n].data.media_embed.width :: number
+.data.children[n].data.media_embed.content :: empty | string
+.data.children[n].data.media_embed.height :: empty | number
+.data.children[n].data.media_embed.scrolling :: boolean | empty
+.data.children[n].data.media_embed.width :: empty | number
 .data.children[n].data.media_only :: boolean
 .data.children[n].data.mod_note :: null
 .data.children[n].data.mod_reason_by :: null
@@ -99,8 +99,8 @@
 .data.children[n].data.permalink :: string
 .data.children[n].data.pinned :: boolean
 .data.children[n].data.post_categories :: null
-.data.children[n].data.post_hint :: string
-.data.children[n].data.preview :: object
+.data.children[n].data.post_hint :: empty | string
+.data.children[n].data.preview :: empty | object
 .data.children[n].data.preview.enabled :: boolean
 .data.children[n].data.preview.images :: array
 .data.children[n].data.preview.images[n] :: object
@@ -115,7 +115,7 @@
 .data.children[n].data.preview.images[n].source.url :: string
 .data.children[n].data.preview.images[n].source.width :: number
 .data.children[n].data.preview.images[n].variants :: object
-.data.children[n].data.preview.images[n].variants.gif :: object
+.data.children[n].data.preview.images[n].variants.gif :: empty | object
 .data.children[n].data.preview.images[n].variants.gif.resolutions :: array
 .data.children[n].data.preview.images[n].variants.gif.resolutions[n] :: object
 .data.children[n].data.preview.images[n].variants.gif.resolutions[n].height :: number
@@ -125,7 +125,7 @@
 .data.children[n].data.preview.images[n].variants.gif.source.height :: number
 .data.children[n].data.preview.images[n].variants.gif.source.url :: string
 .data.children[n].data.preview.images[n].variants.gif.source.width :: number
-.data.children[n].data.preview.images[n].variants.mp4 :: object
+.data.children[n].data.preview.images[n].variants.mp4 :: empty | object
 .data.children[n].data.preview.images[n].variants.mp4.resolutions :: array
 .data.children[n].data.preview.images[n].variants.mp4.resolutions[n] :: object
 .data.children[n].data.preview.images[n].variants.mp4.resolutions[n].height :: number
@@ -135,7 +135,7 @@
 .data.children[n].data.preview.images[n].variants.mp4.source.height :: number
 .data.children[n].data.preview.images[n].variants.mp4.source.url :: string
 .data.children[n].data.preview.images[n].variants.mp4.source.width :: number
-.data.children[n].data.preview.reddit_video_preview :: object
+.data.children[n].data.preview.reddit_video_preview :: empty | object
 .data.children[n].data.preview.reddit_video_preview.dash_url :: string
 .data.children[n].data.preview.reddit_video_preview.duration :: number
 .data.children[n].data.preview.reddit_video_preview.fallback_url :: string
@@ -145,7 +145,7 @@
 .data.children[n].data.preview.reddit_video_preview.scrubber_media_url :: string
 .data.children[n].data.preview.reddit_video_preview.transcoding_status :: string
 .data.children[n].data.preview.reddit_video_preview.width :: number
-.data.children[n].data.previous_visits :: array
+.data.children[n].data.previous_visits :: array | empty
 .data.children[n].data.pwls :: number
 .data.children[n].data.quarantine :: boolean
 .data.children[n].data.removal_reason :: null
@@ -154,10 +154,10 @@
 .data.children[n].data.saved :: boolean
 .data.children[n].data.score :: number
 .data.children[n].data.secure_media :: null | object
-.data.children[n].data.secure_media.oembed :: object
-.data.children[n].data.secure_media.oembed.author_name :: string
-.data.children[n].data.secure_media.oembed.author_url :: string
-.data.children[n].data.secure_media.oembed.description :: string
+.data.children[n].data.secure_media.oembed :: empty | object
+.data.children[n].data.secure_media.oembed.author_name :: empty | string
+.data.children[n].data.secure_media.oembed.author_url :: empty | string
+.data.children[n].data.secure_media.oembed.description :: empty | string
 .data.children[n].data.secure_media.oembed.height :: number
 .data.children[n].data.secure_media.oembed.html :: string
 .data.children[n].data.secure_media.oembed.provider_name :: string
@@ -169,7 +169,7 @@
 .data.children[n].data.secure_media.oembed.type :: string
 .data.children[n].data.secure_media.oembed.version :: string
 .data.children[n].data.secure_media.oembed.width :: number
-.data.children[n].data.secure_media.reddit_video :: object
+.data.children[n].data.secure_media.reddit_video :: empty | object
 .data.children[n].data.secure_media.reddit_video.dash_url :: string
 .data.children[n].data.secure_media.reddit_video.duration :: number
 .data.children[n].data.secure_media.reddit_video.fallback_url :: string
@@ -179,13 +179,13 @@
 .data.children[n].data.secure_media.reddit_video.scrubber_media_url :: string
 .data.children[n].data.secure_media.reddit_video.transcoding_status :: string
 .data.children[n].data.secure_media.reddit_video.width :: number
-.data.children[n].data.secure_media.type :: string
+.data.children[n].data.secure_media.type :: empty | string
 .data.children[n].data.secure_media_embed :: object
-.data.children[n].data.secure_media_embed.content :: string
-.data.children[n].data.secure_media_embed.height :: number
-.data.children[n].data.secure_media_embed.media_domain_url :: string
-.data.children[n].data.secure_media_embed.scrolling :: boolean
-.data.children[n].data.secure_media_embed.width :: number
+.data.children[n].data.secure_media_embed.content :: empty | string
+.data.children[n].data.secure_media_embed.height :: empty | number
+.data.children[n].data.secure_media_embed.media_domain_url :: empty | string
+.data.children[n].data.secure_media_embed.scrolling :: boolean | empty
+.data.children[n].data.secure_media_embed.width :: empty | number
 .data.children[n].data.selftext :: string
 .data.children[n].data.selftext_html :: null | string
 .data.children[n].data.send_replies :: boolean
