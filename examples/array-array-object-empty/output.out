@@ -1,0 +1,6 @@
+ :: array
+[n] :: array | object
+[n][n] :: object
+[n][n].a :: boolean | number
+[n][n].c :: empty | string
+[n][n].z :: empty | null

@@ -1,0 +1,4 @@
+ :: array
+[n] :: array | object
+[n].a :: empty | number
+[n][n] :: null | object
