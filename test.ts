@@ -2,7 +2,7 @@ import chalk from "chalk";
 import fs from "fs";
 import path from "path";
 
-import ence from ".";
+import ence, {format, reset} from ".";
 
 const examplesPath = "examples";
 const examplesInput = "input.json";
@@ -25,6 +25,39 @@ test("should return a string", () => {
     expect(typeof ence("null")).toBe("string");
     expect(typeof ence("123")).toBe("string");
     expect(typeof ence('"abc"')).toBe("string");
+});
+
+test("should use and reset the formatting options", () => {
+    const test = `[{}, {"a": "a"}, null, true, 0]`;
+    expect(ence(test)).toBe(
+        " :: array\n" +
+            "[n] :: boolean | null | number | object\n" +
+            "[n].a :: empty | string",
+    );
+
+    format.item = "{item}";
+    format.join = "{join}";
+    format.key = "{key}";
+    format.type = "{types}";
+    format.MISS = "{MISS}";
+    format.NIL = "{NIL}";
+    format.BOOL = "{BOOL}";
+    format.STR = "{STR}";
+    format.NUM = "{NUM}";
+    format.ARR = "{ARR}";
+    format.OBJ = "{OBJ}";
+    expect(ence(test)).toBe(
+        "{types}{ARR}\n" +
+            "{item}{types}{BOOL}{join}{NIL}{join}{NUM}{join}{OBJ}\n" +
+            "{item}{key}a{types}{MISS}{join}{STR}",
+    );
+
+    reset();
+    expect(ence(test)).toBe(
+        " :: array\n" +
+            "[n] :: boolean | null | number | object\n" +
+            "[n].a :: empty | string",
+    );
 });
 
 test("should match the examples", async () => {
@@ -54,12 +87,15 @@ test("should match the examples", async () => {
                 name,
                 input: fs.readFileSync(inputPath, "utf8"),
                 expected: fs.readFileSync(outputPath, "utf8"),
-                results: [] as number[],
+                time: [] as number[],
             };
         })
         .sort(({input: a}, {input: b}) => {
             return a.length > b.length ? 1 : -1;
         });
+
+    // reset formatting
+    reset();
 
     // run all test cases
     cases.forEach(({input, expected}) => {
@@ -68,12 +104,12 @@ test("should match the examples", async () => {
 
     // record perfomance data
     for (let i = 0; i < benchCount; i++) {
-        cases.forEach(({input, results}) => {
+        cases.forEach(({input, time}) => {
             const start = process.hrtime();
             ence(input);
             const [s, ns] = process.hrtime(start);
             const ms = s * 1000 + ns / 1000000;
-            results.push(ms);
+            time.push(ms);
         });
     }
 
@@ -81,8 +117,8 @@ test("should match the examples", async () => {
     const maxNameLength = cases.reduce((max, {name}) => {
         return Math.max(max, name.length);
     }, 0);
-    const output = cases.map(({name, input, results}) => {
-        const average = results.reduce((a, b) => a + b, 0) / results.length;
+    const output = cases.map(({name, input, time}) => {
+        const average = time.reduce((a, b) => a + b, 0) / time.length;
         const padding = Array(maxNameLength - name.length + 1).join(" ");
         name = chalk.bold.blue.underline(name);
         const avg = average.toFixed(5);
