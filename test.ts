@@ -30,7 +30,7 @@ test("should return a string", () => {
 test("should match the examples", async () => {
     const dir = path.join(__dirname, examplesPath);
 
-    // load file data from example directory
+    // load file data from examples directory
     const cases = fs
         .readdirSync(dir)
         .filter((name) => {
@@ -61,18 +61,21 @@ test("should match the examples", async () => {
             return a.length > b.length ? 1 : -1;
         });
 
-    // run all cases and record perfomance data
-    cases.forEach(({input, expected, results}) => {
+    // run all test cases
+    cases.forEach(({input, expected}) => {
         expect(ence(input)).toBe(expected.trimRight());
+    });
 
-        for (let i = 0; i < benchCount; i++) {
+    // record perfomance data
+    for (let i = 0; i < benchCount; i++) {
+        cases.forEach(({input, results}) => {
             const start = process.hrtime();
             ence(input);
             const [s, ns] = process.hrtime(start);
             const ms = s * 1000 + ns / 1000000;
             results.push(ms);
-        }
-    });
+        });
+    }
 
     // format and print test results
     const maxNameLength = cases.reduce((max, {name}) => {

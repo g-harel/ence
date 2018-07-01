@@ -13,149 +13,107 @@ enum types {
     O = "object",
 }
 
-type Map<T> = {
-    [key: string]: T;
-};
+type JSON = JSONBasic | JSONObject | JSONArray;
+type JSONBasic = null | boolean | number | string;
+interface JSONArray extends Array<JSON> {}
+interface JSONObject {
+    [k: string]: JSON;
+}
 
-const joinKeys = (o: Map<boolean>) => {
-    return Object.keys(o)
-        .sort()
-        .join(typeSeparator);
-};
+let info: {
+    [address: string]: {[type in types]?: boolean};
+} = {};
 
-const isBasic = (value: any): string => {
+let expectedKeys: {
+    [address: string]: string[];
+} = {};
+
+const typeOf = (value: JSON): types => {
+    // "object" types
     if (value === null) {
         return types.N;
     }
+    if (Array.isArray(value)) {
+        return types.A;
+    }
+
+    // basic types
     const type = typeof value;
     if (type === "boolean") {
         return types.B;
-    } else if (type === "number") {
+    }
+    if (type === "number") {
         return types.M;
-    } else if (type === "string") {
+    }
+    if (type === "string") {
         return types.S;
     }
-    return "";
+
+    return types.O;
 };
 
-const joinInfo = (info: Map<Map<boolean>>) => {
-    return Object.keys(info)
-        .sort()
-        .map((address) => {
-            return address + typePrefix + joinKeys(info[address]);
-        })
-        .join("\n");
-};
-
-const createEntry = (info: Map<Map<boolean>>, address: string) => {
+const addType = (address: string, value: JSON, shouldExist?: boolean) => {
+    const type = typeOf(value);
     if (info[address] === undefined) {
-        info[address] = {};
-    }
-};
-
-const addToInfo = (info: Map<Map<boolean>>, address: string, type: string) => {
-    if (info[address] === undefined) {
-        info[address] = {};
+        if (shouldExist) {
+            info[address] = {[types.E]: true};
+        } else {
+            info[address] = {};
+        }
     }
     info[address][type] = true;
-};
 
-const addToInfoExpect = (
-    info: Map<Map<boolean>>,
-    address: string,
-    type: string,
-) => {
-    if (info[address] === undefined) {
-        info[address] = {[types.E]: true};
-    }
-    info[address][type] = true;
-};
-
-const addArray = (
-    value: any,
-    address: string,
-    info: Map<Map<boolean>>,
-    firsts: Map<string[]>,
-) => {
-    if (value.length === 0) {
-        return;
-    }
-
-    const newAddr = address + arrayKey;
-    value.forEach((child: any) => {
-        const type = isBasic(child);
-        if (type !== "") {
-            addToInfo(info, newAddr, type);
-            return;
-        }
-        if (Array.isArray(child)) {
-            addToInfo(info, newAddr, types.A);
-            addArray(child, newAddr, info, firsts);
-            return;
-        }
-        addToInfo(info, newAddr, types.O);
-        addObject(child, newAddr, info, firsts);
-    });
-};
-
-const addObject = (
-    value: any,
-    address: string,
-    info: Map<Map<boolean>>,
-    firsts: Map<string[]>,
-): void => {
-    let keys = firsts[address];
-    if (keys === undefined) {
-        keys = Object.keys(value);
-        firsts[address] = keys;
-        keys.forEach((key) => {
-            createEntry(info, address + addressSeparator + key);
+    if (type === types.A) {
+        const addr = address + arrayKey;
+        const val = value as JSONArray;
+        val.forEach((child: any) => {
+            addType(addr, child);
         });
+    }
+    if (type === types.O) {
+        const val = value as JSONObject;
+        const shouldExist = checkKeys(val, address);
+        Object.keys(val).forEach((key) => {
+            const addr = address + addressSeparator + key;
+            addType(addr, val[key], shouldExist);
+        });
+    }
+};
+
+const checkKeys = (value: JSONObject, address: string) => {
+    let keys = expectedKeys[address];
+    const first = keys === undefined;
+
+    if (first) {
+        keys = expectedKeys[address] = Object.keys(value);
     } else {
         keys.forEach((key) => {
             if (value[key] === undefined) {
-                addToInfo(info, address + addressSeparator + key, types.E);
+                info[address + addressSeparator + key][types.E] = true;
             }
         });
     }
 
-    Object.keys(value).forEach((key) => {
-        const val = value[key];
-        const type = isBasic(val);
-        const addr = address + addressSeparator + key;
-        if (type !== "") {
-            addToInfoExpect(info, addr, type);
-            return;
-        }
-        if (Array.isArray(val)) {
-            addToInfoExpect(info, addr, types.A);
-            addArray(val, addr, info, firsts);
-            return;
-        }
-        addToInfoExpect(info, addr, types.O);
-        addObject(val, addr, info, firsts);
-    });
+    return !first;
 };
 
 const ence = (json: string) => {
-    let value = JSON.parse(json);
+    let value: JSON = JSON.parse(json);
 
-    let type = isBasic(value);
-    if (type !== "") {
-        return typePrefix + type;
-    }
+    info = {};
+    expectedKeys = {};
 
-    const info: Map<Map<boolean>> = {};
+    addType("", value);
 
-    if (Array.isArray(value)) {
-        addToInfo(info, "", types.A);
-        addArray(value, "", info, {});
-    } else {
-        addToInfo(info, "", types.O);
-        addObject(value, "", info, {});
-    }
-
-    return joinInfo(info);
+    return Object.keys(info)
+        .sort()
+        .map((address) => {
+            const joinedTypes = Object.keys(info[address])
+                .sort()
+                .join(typeSeparator);
+            return address + typePrefix + joinedTypes;
+        })
+        .join("\n");
 };
 
 export default ence;
