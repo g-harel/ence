@@ -12,13 +12,13 @@ export const format = {
     key: ".",
     type: " :: ",
 
+    array: "array",
+    boolean: "boolean",
     empty: "empty",
     null: "null",
-    boolean: "boolean",
-    string: "string",
     number: "number",
-    array: "array",
     object: "object",
+    string: "string",
 };
 
 // reset the formatting options
