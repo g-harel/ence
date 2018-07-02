@@ -1,0 +1,88 @@
+ :: array
+[n] :: object
+[n]._id :: object
+[n]._id.$oid :: string
+[n].approvalfy :: number | string
+[n].board_approval_month :: string
+[n].boardapprovaldate :: string
+[n].borrower :: empty | string
+[n].closingdate :: empty | string
+[n].country_namecode :: string
+[n].countrycode :: string
+[n].countryname :: string
+[n].countryshortname :: string
+[n].docty :: empty | string
+[n].envassesmentcategorycode :: empty | string
+[n].grantamt :: number
+[n].ibrdcommamt :: number
+[n].id :: string
+[n].idacommamt :: number
+[n].impagency :: empty | string
+[n].lendinginstr :: empty | string
+[n].lendinginstrtype :: empty | string
+[n].lendprojectcost :: number
+[n].majorsector_percent :: array
+[n].majorsector_percent[n] :: object
+[n].majorsector_percent[n].Name :: string
+[n].majorsector_percent[n].Percent :: number
+[n].mjsector_namecode :: array
+[n].mjsector_namecode[n] :: object
+[n].mjsector_namecode[n].code :: string
+[n].mjsector_namecode[n].name :: string
+[n].mjtheme :: array | empty
+[n].mjtheme[n] :: string
+[n].mjtheme_namecode :: array
+[n].mjtheme_namecode[n] :: object
+[n].mjtheme_namecode[n].code :: string
+[n].mjtheme_namecode[n].name :: string
+[n].mjthemecode :: string
+[n].prodline :: string
+[n].prodlinetext :: string
+[n].productlinetype :: string
+[n].project_abstract :: empty | object
+[n].project_abstract.cdata :: string
+[n].project_name :: string
+[n].projectdocs :: array | empty
+[n].projectdocs[n] :: object
+[n].projectdocs[n].DocDate :: string
+[n].projectdocs[n].DocType :: string
+[n].projectdocs[n].DocTypeDesc :: string
+[n].projectdocs[n].DocURL :: string
+[n].projectdocs[n].EntityID :: string
+[n].projectfinancialtype :: string
+[n].projectstatusdisplay :: string
+[n].regionname :: string
+[n].sector :: array
+[n].sector1 :: object
+[n].sector1.Name :: string
+[n].sector1.Percent :: number
+[n].sector2 :: empty | object
+[n].sector2.Name :: string
+[n].sector2.Percent :: number
+[n].sector3 :: empty | object
+[n].sector3.Name :: string
+[n].sector3.Percent :: number
+[n].sector4 :: empty | object
+[n].sector4.Name :: string
+[n].sector4.Percent :: number
+[n].sector[n] :: object
+[n].sector[n].Name :: string
+[n].sector_namecode :: array
+[n].sector_namecode[n] :: object
+[n].sector_namecode[n].code :: string
+[n].sector_namecode[n].name :: string
+[n].sectorcode :: string
+[n].source :: string
+[n].status :: string
+[n].supplementprojectflg :: string
+[n].theme1 :: object
+[n].theme1.Name :: string
+[n].theme1.Percent :: number
+[n].theme_namecode :: array | empty
+[n].theme_namecode[n] :: object
+[n].theme_namecode[n].code :: string
+[n].theme_namecode[n].name :: string
+[n].themecode :: empty | string
+[n].totalamt :: number
+[n].totalcommamt :: number
+[n].url :: string

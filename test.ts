@@ -7,7 +7,7 @@ import ence, {format, reset} from ".";
 const examplesPath = "examples";
 const examplesInput = "input.json";
 const examplesOutput = "output.out";
-const benchCount = 32;
+const benchCount = 16;
 
 test("should be a function", () => {
     expect(ence).toBeInstanceOf(Function);
