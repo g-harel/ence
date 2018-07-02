@@ -12,13 +12,13 @@ export const format = {
     key: ".",
     type: " :: ",
 
-    MISS: "empty",
-    NIL: "null",
-    BOOL: "boolean",
-    STR: "string",
-    NUM: "number",
-    ARR: "array",
-    OBJ: "object",
+    empty: "empty",
+    null: "null",
+    boolean: "boolean",
+    string: "string",
+    number: "number",
+    array: "array",
+    object: "object",
 };
 
 // reset the formatting options
@@ -38,25 +38,25 @@ let expectedKeys: {
 const typeOf = (value: JSON): string => {
     // "object" types
     if (value === null) {
-        return format.NIL;
+        return format.null;
     }
     if (Array.isArray(value)) {
-        return format.ARR;
+        return format.array;
     }
 
     // basic types
     const type = typeof value;
     if (type === "boolean") {
-        return format.BOOL;
+        return format.boolean;
     }
     if (type === "number") {
-        return format.NUM;
+        return format.number;
     }
     if (type === "string") {
-        return format.STR;
+        return format.string;
     }
 
-    return format.OBJ;
+    return format.object;
 };
 
 const add = (address: string, value: JSON): void => {
@@ -66,43 +66,50 @@ const add = (address: string, value: JSON): void => {
     }
     info[address][type] = true;
 
-    if (type === format.ARR) {
-        const addr = address + format.item;
+    if (type === format.array) {
         const val = value as JSONArray;
-        val.forEach((child: any) => {
-            add(addr, child);
-        });
+        const addr = address + format.item;
+        for (let i = 0, len = val.length; i < len; ++i) {
+            add(addr, val[i]);
+        }
     }
 
-    if (type === format.OBJ) {
+    if (type === format.object) {
         const val = value as JSONObject;
-        keys(address, val);
-        Object.keys(val).forEach((key) => {
-            add(address + format.key + key, val[key]);
-        });
+        empties(address, val);
+        const keys = Object.keys(val);
+        for (let i = 0, len = keys.length; i < len; ++i) {
+            add(address + format.key + keys[i], val[keys[i]]);
+        }
     }
 };
 
-const keys = (address: string, value: JSONObject): void => {
+const empties = (address: string, value: JSONObject): void => {
     if (expectedKeys[address] === undefined) {
         expectedKeys[address] = Object.keys(value);
         return;
     }
 
+    let keys: string[];
+
     // check that all expected keys are on object
-    expectedKeys[address].forEach((key) => {
+    keys = expectedKeys[address];
+    for (let i = 0, len = keys.length; i < len; ++i) {
+        const key = keys[i];
         if (value[key] === undefined) {
-            info[address + format.key + key][format.MISS] = true;
+            info[address + format.key + key][format.empty] = true;
+            expectedKeys[address].slice(i, 1);
         }
-    });
+    }
 
     // check that object does not have any extra keys
-    Object.keys(value).forEach((key) => {
-        const addr = address + format.key + key;
+    keys = Object.keys(value);
+    for (let i = 0, len = keys.length; i < len; ++i) {
+        const addr = address + format.key + keys[i];
         if (info[addr] === undefined) {
-            info[addr] = {[format.MISS]: true};
+            info[addr] = {[format.empty]: true};
         }
-    });
+    }
 };
 
 const ence = (json: string): string => {
@@ -113,15 +120,16 @@ const ence = (json: string): string => {
 
     add("", value);
 
-    return Object.keys(info)
-        .sort()
-        .map((address) => {
-            const joinedTypes = Object.keys(info[address])
-                .sort()
-                .join(format.join);
-            return address + format.type + joinedTypes;
-        })
-        .join("\n");
+    const addresses = Object.keys(info).sort();
+    let str = "";
+    for (let i = 0, len = addresses.length; i < len; ++i) {
+        const joinedTypes = Object.keys(info[addresses[i]])
+            .sort()
+            .join(format.join);
+        str += addresses[i] + format.type + joinedTypes + "\n";
+    }
+
+    return str.trimRight();
 };
 
 export default ence;

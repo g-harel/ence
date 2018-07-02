@@ -39,13 +39,13 @@ test("should use and reset the formatting options", () => {
     format.join = "{join}";
     format.key = "{key}";
     format.type = "{types}";
-    format.MISS = "{MISS}";
-    format.NIL = "{NIL}";
-    format.BOOL = "{BOOL}";
-    format.STR = "{STR}";
-    format.NUM = "{NUM}";
-    format.ARR = "{ARR}";
-    format.OBJ = "{OBJ}";
+    format.empty = "{MISS}";
+    format.null = "{NIL}";
+    format.boolean = "{BOOL}";
+    format.string = "{STR}";
+    format.number = "{NUM}";
+    format.array = "{ARR}";
+    format.object = "{OBJ}";
     expect(ence(test)).toBe(
         "{types}{ARR}\n" +
             "{item}{types}{BOOL}{join}{NIL}{join}{NUM}{join}{OBJ}\n" +

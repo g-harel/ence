@@ -7,7 +7,7 @@ import ence, {format, reset} from ".";
 const flags = {
     help: process.argv.indexOf("--help") > -1,
     pretty: process.argv.indexOf("--pretty") > -1,
-}
+};
 
 let input = "";
 
@@ -24,13 +24,13 @@ process.stdin.on("end", () => {
         format.key = chalk.bold.bold.grey(".");
         format.join = chalk.bold.grey(" | ");
         format.type = chalk.bold.grey(" :: ");
-        format.MISS = chalk.redBright("empty");
-        format.NIL = chalk.magentaBright("null");
-        format.BOOL = chalk.magentaBright("boolean");
-        format.STR = chalk.magentaBright("string");
-        format.NUM = chalk.magentaBright("number");
-        format.ARR = chalk.magentaBright("array");
-        format.OBJ = chalk.magentaBright("object");
+        format.empty = chalk.redBright("empty");
+        format.null = chalk.magentaBright("null");
+        format.boolean = chalk.magentaBright("boolean");
+        format.string = chalk.magentaBright("string");
+        format.number = chalk.magentaBright("number");
+        format.array = chalk.magentaBright("array");
+        format.object = chalk.magentaBright("object");
     }
     console.log(ence(input));
     reset();
