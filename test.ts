@@ -39,17 +39,17 @@ test("should use and reset the formatting options", () => {
     format.join = "{join}";
     format.key = "{key}";
     format.type = "{types}";
-    format.empty = "{MISS}";
-    format.null = "{NIL}";
-    format.boolean = "{BOOL}";
-    format.string = "{STR}";
-    format.number = "{NUM}";
-    format.array = "{ARR}";
-    format.object = "{OBJ}";
+    format.empty = "{empty}";
+    format.null = "{null}";
+    format.boolean = "{boolean}";
+    format.string = "{string}";
+    format.number = "{number}";
+    format.array = "{array}";
+    format.object = "{object}";
     expect(ence(test)).toBe(
-        "{types}{ARR}\n" +
-            "{item}{types}{BOOL}{join}{NIL}{join}{NUM}{join}{OBJ}\n" +
-            "{item}{key}a{types}{MISS}{join}{STR}",
+        "{types}{array}\n" +
+            "{item}{types}{boolean}{join}{null}{join}{number}{join}{object}\n" +
+            "{item}{key}a{types}{empty}{join}{string}",
     );
 
     reset();
@@ -118,11 +118,17 @@ test("should match the examples", async () => {
         return Math.max(max, name.length);
     }, 0);
     const output = cases.map(({name, input, time}) => {
+        // ignore extreme values
+        time = time.sort((a, b) => (a < b ? -1 : 1));
+        time = time.splice(benchCount / 4, benchCount / 2);
+
         const average = time.reduce((a, b) => a + b, 0) / time.length;
+
         const padding = Array(maxNameLength - name.length + 1).join(" ");
         name = chalk.bold.blue.underline(name);
         const avg = average.toFixed(5);
         const bytes = chalk.grey("" + input.length);
+
         return `${name}${padding} ${avg} ${bytes}`;
     });
     console.log(output.join("\n"));
