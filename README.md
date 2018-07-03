@@ -1,4 +1,4 @@
-# ence [![NPM Version](https://img.shields.io/npm/v/ence.svg)](https://www.npmjs.com/package/ence) [![Build Status](https://travis-ci.org/g-harel/ence.svg?branch=master)](https://travis-ci.org/g-harel/ence) ![npm type definitions](https://img.shields.io/npm/types/ence.svg)
+# ence [![NPM Version](https://img.shields.io/npm/v/ence.svg)](https://www.npmjs.com/package/ence) [![Build Status](https://travis-ci.org/g-harel/ence.svg?branch=master)](https://travis-ci.org/g-harel/ence) [![NPM Type Definitions](https://img.shields.io/npm/types/ence.svg)](https://github.com/g-harel/ence)
 
 > automation-friendly json schemas
 
