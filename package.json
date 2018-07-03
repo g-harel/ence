@@ -1,7 +1,7 @@
 {
   "name": "ence",
   "version": "1.0.0",
-  "description": "serialize JSON type information",
+  "description": "automation-friendly json schemas ",
   "author": "g-harel",
   "license": "MIT",
   "main": "index.js",
@@ -9,6 +9,8 @@
     "ence": "ence.js"
   },
   "scripts": {
+    "prepack": "npm run build",
+    "postpublish": "npm run clean",
     "test": "run-s format test:unit",
     "test:unit": "jest",
     "build": "tsc",
