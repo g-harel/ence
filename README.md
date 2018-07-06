@@ -15,10 +15,10 @@
       address           type(s)
 ```
 
-#### Examples
+#### Example
 
 ```json
-[{"id": 123456, "abc": 31415},{"id": "654321"}, null]
+[{"id": 123456, "abc": 31415}, {"id": "654321"}, null]
 ```
 
 ```text
@@ -27,8 +27,6 @@
 [n].abc :: empty | number
 [n].id :: number | string
 ```
-
-More examples can be found [in this directory](./examples).
 
 ## Install
 
@@ -53,29 +51,29 @@ ence [--help] [--pretty]
 ```
 
 ```shell
-# Explore api response object:
+# Explore api response object
 $ curl example.com/data.json | ence
 
-# Analyze local file:
+# Analyze local file
 $ cat ./data.json | ence --pretty
 ```
 
 
 ```shell
-# Filter top level keys:
+# Filter top level keys
 $ ... | ence | grep -P "^\.\w+ ::"
 
-# Filter potentially empty addresses:
+# Filter potentially empty addresses
 $ ... | ence | grep -P "::.*empty"
 
-# Filter mixed-type arrays:
+# Filter mixed-type arrays
 $ ... | ence | grep -p "\[n\] ::.*\|"
 ```
 
 #### API
 
 ```typescript
-// generate schema
+// compute schema
 ence(json: string): string
 
 // customize syntax strings
@@ -137,6 +135,7 @@ Quad core Intel Core i7-8550U @ 1.80GHz
 +---------------------------+-----------+------------+
 ```
 
+The test cases can be found [in this directory](./examples).
 
 ## License
 

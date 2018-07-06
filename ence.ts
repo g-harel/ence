@@ -21,16 +21,17 @@ process.stdin.on("data", (chunk) => {
 process.stdin.on("end", () => {
     if (flags.pretty) {
         format.item = chalk.bold.grey("[") + "n" + chalk.bold.grey("]");
-        format.key = chalk.bold.bold.grey(".");
         format.join = chalk.bold.grey(" | ");
+        format.key = chalk.bold.bold.grey(".");
         format.type = chalk.bold.grey(" :: ");
+
+        format.array = chalk.magentaBright("array");
+        format.boolean = chalk.magentaBright("boolean");
         format.empty = chalk.redBright("empty");
         format.null = chalk.magentaBright("null");
-        format.boolean = chalk.magentaBright("boolean");
-        format.string = chalk.magentaBright("string");
         format.number = chalk.magentaBright("number");
-        format.array = chalk.magentaBright("array");
         format.object = chalk.magentaBright("object");
+        format.string = chalk.magentaBright("string");
     }
     console.log(ence(input));
     reset();
@@ -41,9 +42,12 @@ if (process.stdin.isTTY || flags.help) {
     console.log(`
     ence [--help] [--pretty]
 
-      example usages:
-        $ curl http://example.com/users.json | ence
-        $ cat data.json | ence --pretty
+      Examples
+        ${chalk.grey("Explore api response object")}
+        $ curl example.com/data.json | ence
+
+        ${chalk.grey("Analyze local file")}
+        $ cat ./data.json | ence --pretty
     `);
     process.exit(0);
 }

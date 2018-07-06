@@ -1,9 +1,7 @@
 type JSON = JSONBasic | JSONObject | JSONArray;
 type JSONBasic = null | boolean | number | string;
 interface JSONArray extends Array<JSON> {}
-interface JSONObject {
-    [k: string]: JSON;
-}
+interface JSONObject extends Record<string, JSON> {}
 
 // exported to allow customization
 export const format = {
