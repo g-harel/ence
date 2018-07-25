@@ -2,7 +2,7 @@ import chalk from "chalk";
 import fs from "fs";
 import path from "path";
 
-import ence, {format, reset} from ".";
+import ence from ".";
 
 const examplesPath = "examples";
 const examplesInput = "input.json";
@@ -27,7 +27,7 @@ test("should return a string", () => {
     expect(typeof ence('"abc"')).toBe("string");
 });
 
-test("should use and reset the formatting options", () => {
+test("should use the formatting options", () => {
     const test = `[{}, {"a": "a"}, null, true, 0]`;
     expect(ence(test)).toBe(
         " :: array\n" +
@@ -35,30 +35,36 @@ test("should use and reset the formatting options", () => {
             "[n].a :: empty | string",
     );
 
-    format.item = "{item}";
-    format.join = "{join}";
-    format.key = "{key}";
-    format.type = "{types}";
+    const f = {
+        item: "{item}",
+        join: "{join}",
+        key: "{key}",
+        type: "{types}",
 
-    format.array = "{array}";
-    format.boolean = "{boolean}";
-    format.empty = "{empty}";
-    format.null = "{null}";
-    format.number = "{number}";
-    format.object = "{object}";
-    format.string = "{string}";
+        array: "{array}",
+        boolean: "{boolean}",
+        empty: "{empty}",
+        null: "{null}",
+        number: "{number}",
+        object: "{object}",
+        string: "{string}",
+    };
 
-    expect(ence(test)).toBe(
+    expect(ence(test, f)).toBe(
         "{types}{array}\n" +
             "{item}{types}{boolean}{join}{null}{join}{number}{join}{object}\n" +
             "{item}{key}a{types}{empty}{join}{string}",
     );
+});
 
-    reset();
-    expect(ence(test)).toBe(
-        " :: array\n" +
-            "[n] :: boolean | null | number | object\n" +
-            "[n].a :: empty | string",
+test("should support duplicate formatting strings", () => {
+    const f = {
+        object: "test",
+        array: "test",
+        empty: "undefined",
+    };
+    expect(ence(`[{"a": 0}, {}]`, f)).toBe(
+        " :: test\n" + "[n] :: test\n" + "[n].a :: number | undefined",
     );
 });
 
@@ -95,9 +101,6 @@ test("should match the examples", async () => {
         .sort(({input: a}, {input: b}) => {
             return a.length > b.length ? 1 : -1;
         });
-
-    // reset formatting
-    reset();
 
     // run all test cases
     cases.forEach(({input, expected}) => {

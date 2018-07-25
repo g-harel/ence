@@ -1,11 +1,11 @@
 # ence [![NPM Version](https://img.shields.io/npm/v/ence.svg)](https://www.npmjs.com/package/ence) [![Build Status](https://travis-ci.org/g-harel/ence.svg?branch=master)](https://travis-ci.org/g-harel/ence) [![NPM Type Definitions](https://img.shields.io/npm/types/ence.svg)](https://github.com/g-harel/ence)
 
-> automation-friendly json schemas
+> automation friendly json schemas
 
-* Deterministic result ideal for diffs and snapshot testing.
-* Full address output convenient for grep analysis.
-* Missing/inconsistent object key detection.
-* Compatible with any tool outputting to stdin.
+* Deterministic result ideal for diffs and snapshot testing
+* Full address output convenient for grep analysis
+* Missing/inconsistent object key detection
+* Compatible with any tool outputting to stdin
 
 #### Syntax
 
@@ -51,7 +51,7 @@ ence [--help] [--pretty]
 ```
 
 ```shell
-# Explore api response object
+# Explore api response data
 $ curl example.com/data.json | ence
 
 # Analyze local file
@@ -67,7 +67,7 @@ $ ... | ence | grep -P "^\.\w+ ::"
 $ ... | ence | grep -P "::.*empty"
 
 # Filter mixed-type arrays
-$ ... | ence | grep -p "\[n\] ::.*\|"
+$ ... | ence | grep -P "\[n\] ::.*\|"
 ```
 
 #### API
