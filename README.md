@@ -74,35 +74,32 @@ $ ... | ence | grep -P "\[n\] ::.*\|"
 
 ```typescript
 // compute schema
-ence(json: string): string
+ence(json: string, options?: Options): string
 
-// customize syntax strings
-ence.format.item = "[n]",
-ence.format.join = " | ",
-ence.format.key = ".",
-ence.format.type = " :: ",
+const options: Options = {
+   // customize syntax strings
+   item: "[n]",
+   join: " | ",
+   key: ".",
+   type: " :: ",
 
-// customize type strings
-ence.format.array = "array",
-ence.format.boolean = "boolean",
-ence.format.empty = "empty",
-ence.format.null = "null",
-ence.format.number = "number",
-ence.format.object = "object",
-ence.format.string = "string",
+   // customize type strings
+   array: "array",
+   boolean: "boolean",
+   empty: "empty",
+   null: "null",
+   number: "number",
+   object: "object",
+   string: "string",
+}
 
-// reset custom formatting
-ence.reset(): void
 ```
 
 ```javascript
 const ence = require("ence");
 
-ence.format.array = "list";
-
-ence("[]"); // " :: list"
-
-ence.reset();
+ence("[]");                  // => " :: array"
+ence("[]", {array: "list"}); // => " :: list"
 ```
 
 ## Performance

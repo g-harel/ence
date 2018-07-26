@@ -52,6 +52,7 @@
   },
   "prettier": {
     "tabWidth": 4,
+    "printWidth": 85,
     "trailingComma": "all",
     "bracketSpacing": false,
     "arrowParens": "always"

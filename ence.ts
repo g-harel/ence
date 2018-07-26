@@ -2,7 +2,7 @@
 
 import chalk from "chalk";
 
-import ence, {format, reset} from ".";
+import ence, {Options} from ".";
 
 const flags = {
     help: process.argv.indexOf("--help") > -1,
@@ -19,22 +19,22 @@ process.stdin.on("data", (chunk) => {
 });
 
 process.stdin.on("end", () => {
+    const options: Options = {};
     if (flags.pretty) {
-        format.item = chalk.bold.grey("[") + "n" + chalk.bold.grey("]");
-        format.join = chalk.bold.grey(" | ");
-        format.key = chalk.bold.bold.grey(".");
-        format.type = chalk.bold.grey(" :: ");
+        options.item = chalk.bold.grey("[") + "n" + chalk.bold.grey("]");
+        options.join = chalk.bold.grey(" | ");
+        options.key = chalk.bold.bold.grey(".");
+        options.type = chalk.bold.grey(" :: ");
 
-        format.array = chalk.magentaBright("array");
-        format.boolean = chalk.magentaBright("boolean");
-        format.empty = chalk.redBright("empty");
-        format.null = chalk.magentaBright("null");
-        format.number = chalk.magentaBright("number");
-        format.object = chalk.magentaBright("object");
-        format.string = chalk.magentaBright("string");
+        options.array = chalk.magentaBright("array");
+        options.boolean = chalk.magentaBright("boolean");
+        options.empty = chalk.redBright("empty");
+        options.null = chalk.magentaBright("null");
+        options.number = chalk.magentaBright("number");
+        options.object = chalk.magentaBright("object");
+        options.string = chalk.magentaBright("string");
     }
-    console.log(ence(input));
-    reset();
+    console.log(ence(input, options));
 });
 
 // nothing being piped or --help
